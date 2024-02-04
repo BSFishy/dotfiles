@@ -1,0 +1,16 @@
+{{ if eq .chezmoi.os "windows" }}
+# Check if Scoop is installed by attempting to run a Scoop command
+if (-not (Get-Command scoop -ErrorAction SilentlyContinue)) {
+    Write-Output "Scoop is not installed. Installing Scoop..."
+    Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
+    # Ensure Scoop is added to the current session's PATH
+    $env:Path += ";$env:USERPROFILE\scoop\shims"
+} else {
+    Write-Output "Scoop is already installed."
+}
+
+Write-Output "Installing programs with Scoop..."
+scoop install lazygit fd ripgrep
+{{ else }}
+echo "This script is intended for Windows environments only."
+{{ end }}

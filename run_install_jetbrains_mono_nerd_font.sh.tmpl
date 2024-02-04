@@ -1,0 +1,40 @@
+{{ if eq .chezmoi.os "windows" }}
+# PowerShell commands for Windows
+$fontUrl = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
+$fontZipPath = "$env:TEMP\JetBrainsMono.zip"
+$fontExtractPath = "$env:TEMP\JetBrainsMono"
+
+Invoke-WebRequest -Uri $fontUrl -OutFile $fontZipPath
+Expand-Archive -Path $fontZipPath -DestinationPath $fontExtractPath
+$fonts = (New-Object -ComObject Shell.Application).Namespace(0x14)
+Get-ChildItem -Path "$fontExtractPath\*.ttf" | ForEach-Object { $fonts.CopyHere($_.FullName) }
+Remove-Item $fontZipPath
+Remove-Item $fontExtractPath -Recurse
+
+{{ else if eq .chezmoi.os "darwin" }}
+# Bash commands for macOS
+fontUrl="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
+fontZipPath="/tmp/JetBrainsMono.zip"
+fontExtractPath="/tmp/JetBrainsMono"
+
+curl -L $fontUrl -o $fontZipPath
+unzip $fontZipPath -d $fontExtractPath
+cp "$fontExtractPath/*.ttf" ~/Library/Fonts/
+rm $fontZipPath
+rm -r $fontExtractPath
+
+{{ else if eq .chezmoi.os "linux" }}
+# Bash commands for Linux
+fontUrl="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
+fontZipPath="/tmp/JetBrainsMono.zip"
+fontExtractPath="/tmp/JetBrainsMono"
+
+wget $fontUrl -O $fontZipPath
+unzip $fontZipPath -d $fontExtractPath
+mkdir -p ~/.local/share/fonts
+cp "$fontExtractPath/*.ttf" ~/.local/share/fonts/
+fc-cache -f -v
+rm $fontZipPath
+rm -r $fontExtractPath
+
+{{ end }}

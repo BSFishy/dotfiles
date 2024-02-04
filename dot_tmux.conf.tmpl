@@ -1,0 +1,35 @@
+# Set prefix from C-b to C-a
+unbind C-b
+set-option -g prefix C-a
+bind-key C-a send-prefix
+
+# Set proper color support
+set -g default-terminal "tmux-256color"
+set -ga terminal-overrides ",xterm-256color:Tc"
+
+# Configure for nvim
+set-option -sg escape-time 10
+set-option -g focus-events on
+
+# Enable mouse support
+set-option -g mouse on
+
+# Reload config file with prefix R
+bind r source-file ~/.tmux.conf \; display-message "Config reloaded.."
+
+# Vi-like bindings for copy mode
+setw -g mode-keys vi
+bind-key -T copy-mode-vi 'v' send -X begin-selection
+
+{{ if eq .chezmoi.os "darwin" }}
+bind -T copy-mode-vi y send-keys -X copy-pipe "pbcopy"
+{{ else }}
+bind -T copy-mode-vi y send-keys -X copy-pipe "xclip -selection clipboard"
+{{ end }}
+
+# This is what ChatGPT origincally recommended.
+# bind-key -T copy-mode-vi 'y' send -X copy-pipe-and-cancel "pbcopy"
+
+# Start numbering at 1
+set -g base-index 1
+setw -g pane-base-index 1

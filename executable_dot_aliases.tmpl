@@ -1,0 +1,19 @@
+# alias cat with bat if it exists
+if [ -x "$(command -v bat)" ] ; then
+    alias cat="bat"
+fi
+
+# alias ls with lsd if it exists
+if [ -x "$(command -v lsd)" ] ; then
+    alias ls="lsd"
+fi
+
+# alias ps with procs if it exists
+# if [ -x "$(command -v procs)" ] ; then
+#     alias ps="procs"
+# fi
+
+# alias time with hyperfine if it exists
+# if [ -x "$(command -v hyperfine)" ] ; then
+#     alias time="hyperfine"
+# fi

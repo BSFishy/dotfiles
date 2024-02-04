@@ -1,0 +1,14 @@
+{{ if eq .chezmoi.os "windows" }}
+Write-Output "Brew is unavailable on Windows..."
+{{ else }}
+# Check if Homebrew is installed
+if ! command -v brew &>/dev/null; then
+    echo "Homebrew not found. Installing Homebrew..."
+    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+else
+    echo "Homebrew is already installed."
+fi
+
+echo "Installing programs..."
+brew install lazygit fd ripgrep
+{{ end }}

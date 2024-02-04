@@ -1,0 +1,23 @@
+{{ if eq .chezmoi.os "windows" }}
+# PowerShell commands for Windows
+$NVIM_CONFIG_DIR = Join-Path $HOME -ChildPath "AppData\Local\nvim"
+$GITHUB_REPO = "git@github.com:BSFishy/init.lua.git"
+
+if (-Not (Test-Path $NVIM_CONFIG_DIR)) {
+    Write-Output "Cloning Neovim configuration from $GITHUB_REPO into $NVIM_CONFIG_DIR"
+    git clone $GITHUB_REPO $NVIM_CONFIG_DIR
+} else {
+    Write-Output "Neovim configuration directory already exists: $NVIM_CONFIG_DIR"
+}
+{{ else }}
+# Shell commands for Unix-like systems
+NVIM_CONFIG_DIR="$HOME/.config/nvim"
+GITHUB_REPO="git@github.com:BSFishy/init.lua.git"
+
+if [ ! -d "$NVIM_CONFIG_DIR" ]; then
+    echo "Cloning Neovim configuration from $GITHUB_REPO into $NVIM_CONFIG_DIR"
+    git clone "$GITHUB_REPO" "$NVIM_CONFIG_DIR"
+else
+    echo "Neovim configuration directory already exists: $NVIM_CONFIG_DIR"
+fi
+{{ end }}
