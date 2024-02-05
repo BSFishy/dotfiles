@@ -9,7 +9,8 @@ if (-Not (Test-Path $NVIM_CONFIG_DIR)) {
 } else {
     Write-Output "Neovim configuration directory already exists: $NVIM_CONFIG_DIR"
 }
-{{ else }}
+{{ else }}#!/usr/bin/env bash
+
 # Shell commands for Unix-like systems
 NVIM_CONFIG_DIR="$HOME/.config/nvim"
 GITHUB_REPO="git@github.com:BSFishy/init.lua.git"

@@ -1,6 +1,7 @@
 {{ if eq .chezmoi.os "windows" }}
 Write-Output "Brew is unavailable on Windows..."
-{{ else }}
+{{ else }}#!/usr/bin/env bash
+
 # Checking if Zsh is installed
 if ! command -v zsh &>/dev/null; then
     echo "Zsh is not installed. Please install Zsh first."

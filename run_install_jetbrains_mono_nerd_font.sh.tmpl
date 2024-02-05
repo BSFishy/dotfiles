@@ -11,7 +11,8 @@ Get-ChildItem -Path "$fontExtractPath\*.ttf" | ForEach-Object { $fonts.CopyHere(
 Remove-Item $fontZipPath
 Remove-Item $fontExtractPath -Recurse
 
-{{ else if eq .chezmoi.os "darwin" }}
+{{ else if eq .chezmoi.os "darwin" }}#!/usr/bin/env bash
+
 # Bash commands for macOS
 fontUrl="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
 fontZipPath="/tmp/JetBrainsMono.zip"
@@ -23,7 +24,8 @@ cp "$fontExtractPath/*.ttf" ~/Library/Fonts/
 rm $fontZipPath
 rm -r $fontExtractPath
 
-{{ else if eq .chezmoi.os "linux" }}
+{{ else if eq .chezmoi.os "linux" }}#!/usr/bin/env bash
+
 # Bash commands for Linux
 fontUrl="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
 fontZipPath="/tmp/JetBrainsMono.zip"
