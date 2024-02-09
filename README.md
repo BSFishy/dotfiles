@@ -38,7 +38,7 @@ There are also a few other dependencies that are required for the configurations
 To install:
 
 ```sh
-chezmoi init https://github.com/BSFishy/dotfiles.git
+chezmoi init --ssh BSFishy
 ```
 
 To update to the latest version:
