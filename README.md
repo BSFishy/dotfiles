@@ -41,6 +41,12 @@ To install:
 chezmoi init --ssh BSFishy
 ```
 
+To apply the config after installing:
+
+```sh
+chezmoi apply
+```
+
 To update to the latest version:
 
 ```sh
