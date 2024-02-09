@@ -13,6 +13,11 @@ Remove-Item $fontExtractPath -Recurse
 
 {{ else if eq .chezmoi.os "darwin" }}#!/usr/bin/env bash
 
+if ! command -v unzip &>/dev/null; then
+    echo "unzip is not installed. Please install unzip and try again."
+    exit 1
+fi
+
 # Bash commands for macOS
 fontUrl="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
 fontZipPath="/tmp/JetBrainsMono.zip"
@@ -20,11 +25,16 @@ fontExtractPath="/tmp/JetBrainsMono"
 
 curl -L $fontUrl -o $fontZipPath
 unzip $fontZipPath -d $fontExtractPath
-cp "$fontExtractPath/*.ttf" ~/Library/Fonts/
+cp $fontExtractPath/*.ttf ~/Library/Fonts/
 rm $fontZipPath
 rm -r $fontExtractPath
 
 {{ else if eq .chezmoi.os "linux" }}#!/usr/bin/env bash
+
+if ! command -v unzip &>/dev/null; then
+    echo "unzip is not installed. Please install unzip and try again."
+    exit 1
+fi
 
 # Bash commands for Linux
 fontUrl="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
@@ -34,7 +44,7 @@ fontExtractPath="/tmp/JetBrainsMono"
 wget $fontUrl -O $fontZipPath
 unzip $fontZipPath -d $fontExtractPath
 mkdir -p ~/.local/share/fonts
-cp "$fontExtractPath/*.ttf" ~/.local/share/fonts/
+cp $fontExtractPath/*.ttf ~/.local/share/fonts/
 fc-cache -f -v
 rm $fontZipPath
 rm -r $fontExtractPath
