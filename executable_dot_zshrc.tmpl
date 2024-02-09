@@ -103,6 +103,11 @@ source $ZSH/oh-my-zsh.sh
 # fix square brackets by aliasing rake: https://kinopyo.com/en/blog/escape-square-bracket-by-default-in-zsh
 alias rake='noglob rake'
 
+# run common command tasks
+if [ -f "$HOME/.commonrc" ] ; then
+    source $HOME/.commonrc
+fi
+
 # initialize pyenv if possible
 #if [ -x "$(command -v pyenv)" ] ; then
 #    eval "$(pyenv init -)"
@@ -117,9 +122,4 @@ fi
 # enable some aliases if they exist
 if [ -f "$HOME/.aliases" ] ; then
     source $HOME/.aliases
-fi
-
-# run common command tasks
-if [ -f "$HOME/.commonrc" ] ; then
-    source $HOME/.commonrc
 fi
