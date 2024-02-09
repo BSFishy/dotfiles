@@ -30,6 +30,11 @@ if [ -d "$HOME/.nvm" ] ; then
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 fi
 
+# enables bob if it exists
+if [ -d "$HOME/.local/share/bob/nvim-bin" ] ; then
+    export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
+fi
+
 # set PATH so it includes anaconda if it exists
 if [ -d "$HOME/anaconda3" ] ; then
     export PATH="$PATH:$HOME/anaconda3/bin"
