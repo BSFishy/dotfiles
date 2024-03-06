@@ -1,4 +1,5 @@
 local wezterm = require("wezterm")
+local act = wezterm.action
 
 local config = {}
 
@@ -23,6 +24,11 @@ config.window_padding = {
 	right = "1cell",
 	top = "0.5cell",
 	bottom = "0.5cell",
+}
+
+-- Keybindings
+config.keys = {
+	{ key = "v", mods = "CTRL", action = act.PasteFrom("Clipboard") },
 }
 
 return config
