@@ -119,6 +119,11 @@ if [ -x "$(command -v starship)" ] ; then
     eval "$(starship init zsh)"
 fi
 
+# initialize direnv
+if [ -x "$(command -v direnv)" ] ; then
+    eval "$(direnv hook zsh)"
+fi
+
 # enable some aliases if they exist
 if [ -f "$HOME/.aliases" ] ; then
     source $HOME/.aliases
